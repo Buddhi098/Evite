@@ -1,4 +1,4 @@
-package com.telusko.part29springsecex.model;
+package com.evite.evite.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,15 +9,17 @@ import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
 
-    private Users user;
+    private final User user;
 
-    public UserPrincipal(Users user) {
+    // No need for @Autowired here; constructor-based dependency injection is typical for UserDetails
+    public UserPrincipal(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        // Assuming all users have a "USER" role, modify if necessary
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
@@ -27,7 +29,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail(); // Assuming email is used as the username
     }
 
     @Override
@@ -47,6 +49,6 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return true; // Modify based on your application’s logic
     }
 }

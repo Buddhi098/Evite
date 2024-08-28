@@ -1,8 +1,8 @@
-package com.telusko.part29springsecex.service;
+package com.evite.evite.service;
 
-import com.telusko.part29springsecex.model.UserPrincipal;
-import com.telusko.part29springsecex.model.Users;
-import com.telusko.part29springsecex.repo.UserRepo;
+import com.evite.evite.model.User;
+import com.evite.evite.model.UserPrincipal;
+import com.evite.evite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepo.findByUsername(username);
+        User user = userRepository.findByEmail(username);
         if (user == null) {
             System.out.println("User Not Found");
             throw new UsernameNotFoundException("user not found");
