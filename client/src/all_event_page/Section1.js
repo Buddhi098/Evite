@@ -14,21 +14,23 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { useNavigate } from "react-router";
 import SearchBox from "./SearchBox";
 
-import logo1 from "../temp_images/Logo/img (9).png";
-import logo2 from "../temp_images/Logo/img (2).png";
-import logo3 from "../temp_images/Logo/img (3).png";
-import logo4 from "../temp_images/Logo/img (4).png";
-import logo5 from "../temp_images/Logo/img (5).png";
-import logo6 from "../temp_images/Logo/img (7).png";
-import logo7 from "../temp_images/Logo/img (10).png";
+import ev1 from "../images/event/ev1.jpg"
 
-import cover1 from "../temp_images/Cover/img (1).jpg";
-import cover2 from "../temp_images/Cover/img (2).jpg";
-import cover3 from "../temp_images/Cover/img (5).jpg";
-import cover4 from "../temp_images/Cover/img (7).jpg";
-import cover5 from "../temp_images/Cover/img (8).jpg";
-import cover6 from "../temp_images/Cover/img (4).jpg";
-import cover7 from "../temp_images/Cover/img (3).jpg";
+// import logo1 from "../temp_images/Logo/img (9).png";
+// import logo2 from "../temp_images/Logo/img (2).png";
+// import logo3 from "../temp_images/Logo/img (3).png";
+// import logo4 from "../temp_images/Logo/img (4).png";
+// import logo5 from "../temp_images/Logo/img (5).png";
+// import logo6 from "../temp_images/Logo/img (7).png";
+// import logo7 from "../temp_images/Logo/img (10).png";
+
+// import cover1 from "../temp_images/Cover/img (1).jpg";
+// import cover2 from "../temp_images/Cover/img (2).jpg";
+// import cover3 from "../temp_images/Cover/img (5).jpg";
+// import cover4 from "../temp_images/Cover/img (7).jpg";
+// import cover5 from "../temp_images/Cover/img (8).jpg";
+// import cover6 from "../temp_images/Cover/img (4).jpg";
+// import cover7 from "../temp_images/Cover/img (3).jpg";
 
 const categories = [
   "Casual Wear Stores",
@@ -47,56 +49,56 @@ const stores = [
     id: 1,
     name: "Gfock",
     category: "Casual Wear Stores",
-    cover: cover1,
-    logo: logo7,
+    cover: ev1,
+    logo: ev1,
     favorite: false,
   },
   {
     id: 2,
     name: "Asos",
     category: "Casual Wear Stores",
-    cover: cover2,
-    logo: logo1,
+    cover: ev1,
+    logo: ev1,
     favorite: false,
   },
   {
     id: 3,
     name: "Shein",
     category: "Casual Wear Stores",
-    cover: cover3,
-    logo: logo2,
+    cover: ev1,
+    logo: ev1,
     favorite: true,
   },
   {
     id: 3,
     name: "Nixzam",
     category: "Casual Wear Stores",
-    cover: cover4,
-    logo: logo3,
+    cover: ev1,
+    logo: ev1,
     favorite: true,
   },
   {
     id: 4,
     name: "Bixzi",
     category: "Casual Wear Stores",
-    cover: cover5,
-    logo: logo4,
+    cover: ev1,
+    logo: ev1,
     favorite: true,
   },
   {
     id: 5,
     name: "Nolbi",
     category: "Casual Wear Stores",
-    cover: cover6,
-    logo: logo5,
+    cover: ev1,
+    logo: ev1,
     favorite: true,
   },
   {
     id: 6,
     name: "Luqop",
     category: "Casual Wear Stores",
-    cover: cover7,
-    logo: logo1,
+    cover: ev1,
+    logo: ev1,
     favorite: true,
   },
   // Add more stores with unique ids as needed
