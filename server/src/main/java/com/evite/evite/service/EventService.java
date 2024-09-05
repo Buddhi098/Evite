@@ -1,6 +1,7 @@
 package com.evite.evite.service;
 
 import com.evite.evite.dto.EventDTO;
+
 import com.evite.evite.dto.GetEventDto;
 import com.evite.evite.model.Event;
 import com.evite.evite.repository.EventRepository;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EventService {
     private final EventRepository eventRepository;
+
 
     @Autowired
     private final FileStorageService fileStorageService;
@@ -38,6 +41,7 @@ public class EventService {
                     .description(eventDTO.getDescription())
                     .category(eventDTO.getCategory())
                     .userId(eventDTO.getUserId())
+
                     .price(eventDTO.getPrice())
                     .build();
             Event newEvent = eventRepository.save(event);
@@ -64,6 +68,7 @@ public class EventService {
             Map<String, String> response = new HashMap<>();
             response.put("status", "fail");
             response.put("error", e.getMessage());
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
@@ -172,4 +177,5 @@ public class EventService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
 }

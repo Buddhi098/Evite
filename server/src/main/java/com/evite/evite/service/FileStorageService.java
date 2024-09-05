@@ -1,5 +1,6 @@
 package com.evite.evite.service;
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ public class FileStorageService {
     private final Path fileStorageLocation;
 
     public FileStorageService() throws IOException {
+
         // Define the base directory where files will be stored
         this.fileStorageLocation = Paths.get("file-storage").toAbsolutePath().normalize();
 
@@ -79,3 +81,4 @@ public class FileStorageService {
         }
     }
 }
+

@@ -19,6 +19,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DescriptionIcon from "@mui/icons-material/Description";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CategoryIcon from "@mui/icons-material/Category";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney"; // Import icon for price
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import DialogBox from "./DialogBox";
@@ -33,6 +34,7 @@ const validationSchema = Yup.object({
   location: Yup.string().required("Location is required"),
   description: Yup.string().required("Description is required"),
   category: Yup.string().required("Category is required"),
+  price: Yup.number().required("Ticket price is required").positive("Price must be a positive number").nullable(),
   images: Yup.array()
     .of(Yup.mixed().required("An image is required"))
     .min(1, "At least one image is required")
@@ -69,6 +71,7 @@ const CreateEventForm = () => {
       location: "",
       description: "",
       category: "",
+      price: "", // Add initial value for price
       images: [],
     },
     validationSchema: validationSchema,
@@ -286,6 +289,27 @@ const CreateEventForm = () => {
                   </MenuItem>
                 ))}
               </TextField>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                size="small"
+                fullWidth
+                name="price"
+                label="Ticket Price"
+                variant="outlined"
+                required
+                type="number"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AttachMoneyIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                {...formik.getFieldProps("price")}
+                error={formik.touched.price && Boolean(formik.errors.price)}
+                helperText={formik.touched.price && formik.errors.price}
+              />
             </Grid>
             <Grid item xs={12}>
               <input

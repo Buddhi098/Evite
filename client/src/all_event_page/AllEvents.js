@@ -8,13 +8,13 @@ import Footer from '../home/Footer';
 import { theme } from '../Theme';
 
 const AllEvents = () => {
-    const {title} = useParams();
+    // const {title} = useParams();
     const isDesktop = useMediaQuery("(min-width:600px)");
 
   return (
     <ThemeProvider theme={theme}>
         <Topbar/>
-        <Section1 title={title}/>
+        <Section1/>
         <Footer/>
     </ThemeProvider>
   )
