@@ -11,17 +11,17 @@ import { theme } from "../Theme";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-const TicketBooking = ({price}) => {
+import { Link } from "react-router-dom";
+const TicketBooking = ({ price , id }) => {
   const [ticketCount, setTicketCount] = useState(1);
   const [ticketPrice, setTicketPrice] = useState(price);
 
   const addButton = useRef(null);
   const removeButton = useRef(null);
 
-  useEffect(()=>{
-    setTicketPrice(price)
-  } , [price])
-  
+  useEffect(() => {
+    setTicketPrice(price);
+  }, [price]);
 
   function addTicket() {
     setTicketCount((prevCount) => {
@@ -51,7 +51,7 @@ const TicketBooking = ({price}) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper sx={{ width: "35%" ,padding:'16px 10px'}}>
+      <Paper sx={{ width: "35%", padding: "16px 10px" }}>
         <Box
           sx={{
             display: "flex",
@@ -155,7 +155,14 @@ const TicketBooking = ({price}) => {
             borderRadius: "10px",
           }}
         >
-          <Button variant="contained" sx={{boxShadow:'none' , width:"106%" , padding:'10px '}}>Check out for ${ticketPrice}</Button>
+          <Link to={`/payment/${ticketPrice}/${ticketCount}/${id}`}>
+            <Button
+              variant="contained"
+              sx={{ boxShadow: "none", width: "106%", padding: "10px " }}
+            >
+              Check out for ${ticketPrice}
+            </Button>
+          </Link>
         </Box>
       </Paper>
     </ThemeProvider>

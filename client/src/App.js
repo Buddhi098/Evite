@@ -9,6 +9,7 @@ import RegForm from "./register/RegForm";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoutes";
 import AllEvents from "./all_event_page/AllEvents";
+import PaymentForm from "./event/PaymentForm";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/event/:id" element={<Event />} />
             <Route path="/event_form" element={<CreateEventForm />} />
             <Route path="/events" element={<AllEvents />} />
+            <Route path="/payment/:totalTicketPrice/:ticketCount/:eventId" element={<PaymentForm />} />
             <Route
               path="/dashboard"
               element={<ProtectedRoute><Dashboard/></ProtectedRoute>}

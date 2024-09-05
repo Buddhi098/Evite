@@ -59,7 +59,7 @@ const Index = () => {
             }}
           >
             <ImageSlider />
-            <TicketBooking price={event.price}/>
+            <TicketBooking price={event.price} id={id}/>
           </Box>
           <Box>
             <EventDetails date={event.date} time={event.time} location={event.location} description={event.description}/>
