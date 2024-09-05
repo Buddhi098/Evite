@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "./Title";
 import { Box, Paper, Stack } from "@mui/material";
 import ImageSlider from "./Image";
@@ -7,11 +7,28 @@ import bg from "../images/background/event_bg.png";
 import EventDetails from "./EventDetails";
 import Footer from "../home/Footer";
 import Topbar from "../home/Topbar";
+import { useParams } from "react-router-dom";
+import api from "../api/api";
 
-const index = () => {
+const Index = () => {
+  const { id } = useParams();
+
+  const fetchData = async () => {
+    try {
+      const response = await api.get(`/public/user/get_event_by_id//${id}`);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching event", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
   return (
     <Stack>
-       <Topbar/>
+      <Topbar />
       <Box
         sx={{
           background: "#f8f8f8",
@@ -52,4 +69,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

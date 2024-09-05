@@ -4,7 +4,7 @@ import DataTable from './DataTable'
 import DashboardHeader from './DashboardHeader'
 import bg from "../images/background/event_bg_1.png"
 
-const index = () => {
+const Index = () => {
   return (
     <Stack sx={{backgroundImage: `url(${bg})` , minHeight:"100vh"}}>
       <DashboardHeader/>
@@ -13,4 +13,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index

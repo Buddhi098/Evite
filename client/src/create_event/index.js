@@ -4,7 +4,7 @@ import CreateEventForm from "./CreateEventForm";
 import DashboardHeader from "../dashboard/DashboardHeader";
 import bg from "../images/background/event_bg_1.png"; // Make sure the path is correct
 
-const index = () => {
+const Index = () => {
   return (
     <Stack sx={{ backgroundImage: `url(${bg})`,minHeight:"100vh", objectFit: "cover", }}>
       {/* <DashboardHeader /> */}
@@ -13,4 +13,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

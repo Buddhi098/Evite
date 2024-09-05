@@ -7,7 +7,7 @@ import ContactUs from './ContactUs'
 import Footer from './Footer'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-const index = () => {
+const Index = () => {
   return (
     <div>
       <Topbar/>
@@ -20,4 +20,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
