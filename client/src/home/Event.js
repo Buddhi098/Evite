@@ -1,13 +1,28 @@
 import React from "react";
-import { ThemeProvider } from "@mui/material/styles"; // Import ThemeProvider from Material-UI
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../Theme";
 import { Avatar, AvatarGroup, Box, Divider, Typography } from "@mui/material";
+
 import pr1 from "../images/profile/pr1.jpg";
 import pr2 from "../images/profile/pr2.jpg";
 import pr3 from "../images/profile/pr3.jpg";
 import pr4 from "../images/profile/pr4.jpg";
 
-const Event = (props) => {
+import notFound from "../images/not.jpg";
+
+const Event = ({ title, date, time, location, description, imageUrls }) => {
+  console.log(title)
+
+
+  const convertToHttpUrl = (url) => {
+    if (url.startsWith("file:///")) {
+   
+      const filePath = url.replace("file:///D:/evite/server/file-storage/", "http://localhost:9090/public/user/");
+      return filePath;
+    }
+    return url;
+  };
+
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -24,23 +39,37 @@ const Event = (props) => {
           }}
         >
           <Box>
-            <Box
-              component="img"
-              src={props.image}
-              sx={{ width: "100%",height:'150px', borderRadius: "10px" }}
-            ></Box>
+            {imageUrls && imageUrls.length > 0 ? (
+              <Box
+                component="img"
+                src={convertToHttpUrl(imageUrls[0])} // Show the first image from the array
+                sx={{ width: "100%", height: "150px" }}
+              />
+            ) : (
+              <Box
+                component="img"
+                src={notFound} // Show the first image from the array
+                sx={{ width: "100%", height: "150px" }}
+              />
+            )}
           </Box>
 
-          <Box sx={{ display: "flex", fontSize: "10px", color: "primary.400" }}>
-            <Typography variant="body2">WED.MAR 15</Typography>
+          <Box sx={{ display: "flex", color: "primary.400" }}>
+            <Typography variant="body2" sx={{ fontSize: "13px" }}>
+              {date}
+            </Typography>
             <Divider orientation="vertical" flexItem sx={{ marginX: 1 }} />
-            <Typography variant="body2">7.30 PM BST</Typography>
+            <Typography variant="body2" sx={{ fontSize: "13px" }}>
+              {time}
+            </Typography>
           </Box>
 
           <Box sx={{ marginTop: "8px" }}>
-            <Typography variant="h4_title">
-              Career Meetup With Design & Development
-            </Typography>
+            <Typography variant="h4_title">{title}</Typography>
+            <Typography variant="body2" color="textSecondary" sx={{fontSize:"12px"}}>{location}</Typography>
+            {/* <Typography variant="body2" color="textSecondary">
+              {description}
+            </Typography> */}
           </Box>
 
           <Box
@@ -51,20 +80,21 @@ const Event = (props) => {
               alignItems: "center",
             }}
           >
-            <Box>
-              <AvatarGroup
-                total={10}
-                sx={{ "& .MuiAvatar-root": { width: 32, height: 32 } , fontSize:"10px"}}
-              >
-                <Avatar alt="Remy Sharp" src={pr1} />
+            <AvatarGroup
+              total={10}
+              sx={{
+                "& .MuiAvatar-root": { width: 20, height: 20 },
+                fontSize: "10px",
+              }}
+            >
+              <Avatar alt="Remy Sharp" src={pr1} />
                 <Avatar alt="Travis Howard" src={pr2} />
                 <Avatar alt="Agnes Walker" src={pr3} />
                 <Avatar alt="Trevor Henderson" src={pr4} />
-              </AvatarGroup>
-            </Box>
-            <Box>
-              <Typography variant="body2" sx={{color:'text_grey'}}>+20 More</Typography>
-            </Box>
+            </AvatarGroup>
+            <Typography variant="body2" sx={{ color: "text_grey" }}>
+              +20 More
+            </Typography>
           </Box>
         </Box>
       </ThemeProvider>

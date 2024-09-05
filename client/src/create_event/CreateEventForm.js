@@ -8,9 +8,10 @@ import {
   Box,
   InputAdornment,
   MenuItem,
-  Alert,
   Button,
-  IconButton
+  IconButton,
+  Avatar,
+  Tooltip
 } from "@mui/material";
 import EventIcon from "@mui/icons-material/Event";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -32,7 +33,10 @@ const validationSchema = Yup.object({
   location: Yup.string().required("Location is required"),
   description: Yup.string().required("Description is required"),
   category: Yup.string().required("Category is required"),
-  images: Yup.array().of(Yup.mixed().required("An image is required")).min(1, "At least one image is required").max(3, "You can upload up to 3 images")
+  images: Yup.array()
+    .of(Yup.mixed().required("An image is required"))
+    .min(1, "At least one image is required")
+    .max(3, "You can upload up to 3 images")
 });
 
 // Categories list
@@ -54,6 +58,7 @@ const CreateEventForm = () => {
   const [status, setStatus] = React.useState(null);
   const [btnStatus, setBtnStatus] = React.useState(false);
   const [files, setFiles] = React.useState([]);
+  const [previews, setPreviews] = React.useState([]);
 
   // Formik hook
   const formik = useFormik({
@@ -91,6 +96,8 @@ const CreateEventForm = () => {
           },
         });
         setStatus("success");
+        window.scrollTo(0, 0);
+        console.log("Event created successfully:", response.data);
       } catch (error) {
         console.log("Error creating event:", error.response.data);
         setStatus("fail");
@@ -99,8 +106,22 @@ const CreateEventForm = () => {
   });
 
   const handleFileChange = (event) => {
-    setFiles(Array.from(event.target.files));
-    formik.setFieldValue("images", Array.from(event.target.files));
+    const newFiles = Array.from(event.target.files);
+    setFiles(prevFiles => [...prevFiles, ...newFiles]);
+    formik.setFieldValue("images", [...files, ...newFiles]);
+
+    // Generate previews
+    const newPreviews = newFiles.map(file => URL.createObjectURL(file));
+    setPreviews(prevPreviews => [...prevPreviews, ...newPreviews]);
+  };
+
+  const handleRemoveFile = (index) => {
+    const updatedFiles = files.filter((_, i) => i !== index);
+    const updatedPreviews = previews.filter((_, i) => i !== index);
+
+    setFiles(updatedFiles);
+    setPreviews(updatedPreviews);
+    formik.setFieldValue("images", updatedFiles);
   };
 
   return (
@@ -108,7 +129,6 @@ const CreateEventForm = () => {
       sx={{
         paddingY: 4,
         backgroundPosition: "center",
-        height: "100vh",
         minWidth: "100%",
       }}
     >
@@ -288,17 +308,24 @@ const CreateEventForm = () => {
               {formik.touched.images && formik.errors.images ? (
                 <Typography color="error">{formik.errors.images}</Typography>
               ) : null}
-              <Box mt={2}>
-                {files.map((file, index) => (
-                  <Box key={index} display="flex" alignItems="center" mb={1}>
-                    <Typography variant="body2">{file.name}</Typography>
-                    <IconButton
-                      onClick={() => setFiles(files.filter((_, i) => i !== index))}
-                      size="small"
-                      color="error"
-                    >
-                      <AddCircleIcon />
-                    </IconButton>
+              <Box mt={2} display="flex" flexWrap="wrap" gap={2}>
+                {previews.map((preview, index) => (
+                  <Box key={index} position="relative" width={100} height={100}>
+                    <Avatar
+                      src={preview}
+                      variant="square"
+                      sx={{ width: "100%", height: "100%" }}
+                    />
+                    <Tooltip title="Remove image">
+                      <IconButton
+                        onClick={() => handleRemoveFile(index)}
+                        size="small"
+                        color="error"
+                        sx={{ position: "absolute", top: 0, right: 0 }}
+                      >
+                        <AddCircleIcon />
+                      </IconButton>
+                    </Tooltip>
                   </Box>
                 ))}
               </Box>

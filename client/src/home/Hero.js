@@ -5,6 +5,7 @@ import React from "react";
 import hero_img_2 from "../images/home/hero_img_2.png";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -44,45 +45,49 @@ const Hero = () => {
               </Typography>
             </Box>
             <Box sx={{ marginTop: "40px" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{
-                  marginRight: "20px",
-                  fontSize: "12px",
-                  padding: "10px 26px",
-                  fontWeight: "500",
-                  borderRadius: "30px",
-                }}
-              >
-                <EditCalendarIcon
+              <Link to="/dashboard">
+                <Button
+                  variant="contained"
+                  color="primary"
                   sx={{
-                    marginRight: "5px",
-                    fontSize: "16px",
-                    marginBottom: "2px",
+                    marginRight: "20px",
+                    fontSize: "12px",
+                    padding: "10px 26px",
+                    fontWeight: "500",
+                    borderRadius: "30px",
                   }}
-                />
-                Create an Event
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{
-                  marginRight: "20px",
-                  fontSize: "12px",
-                  padding: "10px 26px",
-                  fontWeight: "500",
-                  borderRadius: "30px",
-                }}
-              >
-                <ContentPasteSearchIcon
+                >
+                  <EditCalendarIcon
+                    sx={{
+                      marginRight: "5px",
+                      fontSize: "16px",
+                      marginBottom: "2px",
+                    }}
+                  />
+                  Create an Event
+                </Button>
+              </Link>
+              <Link to="/events">
+                <Button
+                  variant="outlined"
                   sx={{
-                    marginRight: "5px",
-                    fontSize: "16px",
-                    marginBottom: "2px",
+                    marginRight: "20px",
+                    fontSize: "12px",
+                    padding: "10px 26px",
+                    fontWeight: "500",
+                    borderRadius: "30px",
                   }}
-                />
-                FInd an Event
-              </Button>
+                >
+                  <ContentPasteSearchIcon
+                    sx={{
+                      marginRight: "5px",
+                      fontSize: "16px",
+                      marginBottom: "2px",
+                    }}
+                  />
+                  FInd an Event
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box sx={{ width: "60%" }}>

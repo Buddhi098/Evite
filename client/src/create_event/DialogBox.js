@@ -40,7 +40,6 @@ const DialogBox = ({ formik, btnRef ,btnStatus}) => {
       disabled={btnStatus}
         ref={btnRef}
         onClick={handleClickOpen}
-        type="submit"
         variant="contained"
         size="large"
         sx={{

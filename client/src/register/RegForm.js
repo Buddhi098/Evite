@@ -405,7 +405,7 @@ function RegForm() {
       Object.keys(values).forEach((key) => {
         if (key === "businessLicense" && values[key] === null) {
           // Handle file input separately if it's null
-          console.log('skip file')
+          console.log("skip file");
         } else if (values[key] !== null && values[key] !== undefined) {
           formData.append(key, values[key]);
         }
@@ -608,22 +608,27 @@ function RegForm() {
               ml: 10,
             }}
           >
-            <Button
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={
-                activeStep === steps.length - 1 ? handleSubmit : handleNext
-              }
-            >
-              {activeStep === steps.length - 1 ? "Submit" : "Next"}
-            </Button>
+            {activeStep !== steps.length && (
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                Back
+              </Button>
+            )}
+
+            {activeStep !== steps.length && (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={
+                  activeStep === steps.length - 1 ? handleSubmit : handleNext
+                }
+              >
+                {activeStep === steps.length - 1 ? "Submit" : "Next"}
+              </Button>
+            )}
           </Box>
         </Box>
       </Stack>

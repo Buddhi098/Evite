@@ -6,8 +6,8 @@ import bg from "../images/background/event_bg_1.png"; // Make sure the path is c
 
 const index = () => {
   return (
-    <Stack sx={{ backgroundImage: `url(${bg})` , maxHeight:"100vh" , objectFit: "cover", }}>
-      <DashboardHeader />
+    <Stack sx={{ backgroundImage: `url(${bg})`,minHeight:"100vh", objectFit: "cover", }}>
+      {/* <DashboardHeader /> */}
       <CreateEventForm />
     </Stack>
   );

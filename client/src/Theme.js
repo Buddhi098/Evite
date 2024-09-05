@@ -172,7 +172,7 @@ export const theme = createTheme({
     },
     h4_title: {
       fontFamily: "Roboto",
-      fontSize: "20px",
+      fontSize: "16px",
       fontWeight: 500,
     },
     ListItemText: {
