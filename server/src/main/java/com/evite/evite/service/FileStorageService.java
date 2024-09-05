@@ -1,18 +1,16 @@
 package com.evite.evite.service;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FileStorageService {
@@ -20,10 +18,11 @@ public class FileStorageService {
     private final Path fileStorageLocation;
 
     public FileStorageService() throws IOException {
-        // Define the directory where files will be stored
+
+        // Define the base directory where files will be stored
         this.fileStorageLocation = Paths.get("file-storage").toAbsolutePath().normalize();
 
-        // Create the directory if it does not exist
+        // Create the base directory if it does not exist
         Files.createDirectories(this.fileStorageLocation);
     }
 
@@ -46,6 +45,39 @@ public class FileStorageService {
             return targetLocation.toString();
         } catch (IOException ex) {
             throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+
+    // New function to store a list of images according to event ID
+    public List<String> storeEventImages(String eventId, List<MultipartFile> files) {
+        // Define the directory for storing event images
+        Path eventDirectory = this.fileStorageLocation.resolve("events").resolve(eventId).toAbsolutePath().normalize();
+
+        try {
+            // Create the event directory if it does not exist
+            Files.createDirectories(eventDirectory);
+
+            // Store each file in the event directory and return the paths of stored files
+            return files.stream()
+                    .map(file -> {
+                        String fileName = file.getOriginalFilename();
+
+                        if (fileName == null || fileName.contains("..")) {
+                            throw new RuntimeException("Invalid filename: " + fileName);
+                        }
+
+                        try {
+                            Path targetLocation = eventDirectory.resolve(fileName);
+                            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+                            return targetLocation.toString();
+                        } catch (IOException ex) {
+                            throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
+                        }
+                    })
+                    .collect(Collectors.toList());
+
+        } catch (IOException ex) {
+            throw new RuntimeException("Could not create directory for event " + eventId + ". Please try again!", ex);
         }
     }
 }

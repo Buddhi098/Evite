@@ -46,6 +46,8 @@ public class UserService {
     @Autowired
     JWTService jwtService;
 
+    public UserService() throws IOException {
+    }
     public ResponseEntity registerUser(UserRegistrationDTO userRegistrationDTO) throws IOException {
 
         MultipartFile file = userRegistrationDTO.getBusinessLicense();

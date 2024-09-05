@@ -3,9 +3,12 @@ package com.evite.evite.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
-public class EventDTO {
+public class GetEventDto {
+    private String id;
     private String title;
     private String date;
     private String time;
@@ -14,4 +17,5 @@ public class EventDTO {
     private String category;
     private String userId;
     private Double price;
+    private List<String> imageUrls;
 }

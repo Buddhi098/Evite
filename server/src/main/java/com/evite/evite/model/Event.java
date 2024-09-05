@@ -18,5 +18,6 @@ public class Event {
     private String description;
     private String category;
     private String userId;
+    private Double price;
 }
 
