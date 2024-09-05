@@ -48,7 +48,6 @@ public class UserService {
 
     public UserService() throws IOException {
     }
-
     public ResponseEntity registerUser(UserRegistrationDTO userRegistrationDTO) throws IOException {
 
         MultipartFile file = userRegistrationDTO.getBusinessLicense();
