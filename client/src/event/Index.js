@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "./Title";
 import { Box, Paper, Stack } from "@mui/material";
-import ImageSlider from "./Image";
 import TicketBooking from "./TicketBooking";
 import bg from "../images/background/event_bg.png";
 import EventDetails from "./EventDetails";
@@ -9,10 +8,19 @@ import Footer from "../home/Footer";
 import Topbar from "../home/Topbar";
 import { useParams } from "react-router-dom";
 import api from "../api/api";
+import Image from "./Image";
 
 const Index = () => {
   const { id } = useParams();
-  const [event, setEvent] = React.useState({});
+  const [event, setEvent] = useState({
+    title: "",
+    date: "",
+    time: "",
+    location: "",
+    description: "",
+    price: 0,
+    imageUrls: []
+  });
 
   const fetchData = async () => {
     try {
@@ -26,7 +34,7 @@ const Index = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]); // Include id in the dependency array to avoid unnecessary fetches.
 
   return (
     <Stack>
@@ -49,7 +57,7 @@ const Index = () => {
             borderRadius: "20px",
           }}
         >
-          <Title title={event.title} date={event.date}/>
+          <Title title={event.title} date={event.date} />
           <Box
             sx={{
               display: "flex",
@@ -58,11 +66,16 @@ const Index = () => {
               gap: "10px",
             }}
           >
-            <ImageSlider />
-            <TicketBooking price={event.price} id={id}/>
+            <Image images={event.imageUrls}/>
+            <TicketBooking price={event.price} id={id} />
           </Box>
           <Box>
-            <EventDetails date={event.date} time={event.time} location={event.location} description={event.description}/>
+            <EventDetails 
+              date={event.date} 
+              time={event.time} 
+              location={event.location} 
+              description={event.description} 
+            />
           </Box>
         </Paper>
       </Box>

@@ -13,16 +13,6 @@ import notFound from "../images/not.jpg";
 const Event = ({ title, date, time, location, description, imageUrls }) => {
   console.log(title)
 
-
-  const convertToHttpUrl = (url) => {
-    if (url.startsWith("file:///")) {
-   
-      const filePath = url.replace("file:///D:/evite/server/file-storage/", "http://localhost:9090/public/user/");
-      return filePath;
-    }
-    return url;
-  };
-
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -42,8 +32,8 @@ const Event = ({ title, date, time, location, description, imageUrls }) => {
             {imageUrls && imageUrls.length > 0 ? (
               <Box
                 component="img"
-                src={convertToHttpUrl(imageUrls[0])} // Show the first image from the array
-                sx={{ width: "100%", height: "150px" }}
+                src={imageUrls[0]} // Show the first image from the array
+                sx={{ width: "100%", height: "150px" , objectFit:"cover" }}
               />
             ) : (
               <Box
