@@ -101,10 +101,13 @@ public class EventService {
                 if (Files.exists(eventImagesPath) && Files.isDirectory(eventImagesPath)) {
                     try {
                         Files.list(eventImagesPath).forEach(path -> {
-                                imageUrls.add(path.toUri().toString());
+                            String fileName = path.getFileName().toString();
+                            String eventId = event.getId();
+                            imageUrls.add("http://localhost:9090/public/user/events/" + eventId + "/" + fileName);
                         });
                     } catch (IOException e) {
                         // Handle exception if needed
+                        e.printStackTrace();
                     }
                 }
 
@@ -148,10 +151,13 @@ public class EventService {
                 if (Files.exists(eventImagesPath) && Files.isDirectory(eventImagesPath)) {
                     try {
                         Files.list(eventImagesPath).forEach(path -> {
-                            imageUrls.add(path.toUri().toString());
+                            String fileName = path.getFileName().toString();
+                            String eventId = event.get().getId();
+                            imageUrls.add("http://localhost:9090/public/user/events/" + eventId + "/" + fileName);
                         });
                     } catch (IOException e) {
                         // Handle exception if needed
+                        e.printStackTrace();
                     }
                 }
 
