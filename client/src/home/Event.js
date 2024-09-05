@@ -64,7 +64,7 @@ const Event = ({ title, date, time, location, description, imageUrls }) => {
             </Typography>
           </Box>
 
-          <Box sx={{ marginTop: "8px" }}>
+          <Box sx={{display:"flex" ,alignItems:"flex-start" , flexDirection:"column" ,  marginTop: "8px"}}>
             <Typography variant="h4_title">{title}</Typography>
             <Typography variant="body2" color="textSecondary" sx={{fontSize:"12px"}}>{location}</Typography>
             {/* <Typography variant="body2" color="textSecondary">

@@ -7,10 +7,12 @@ import {
   FormControlLabel,
   Grid,
   Pagination,
+  ButtonBase,
 } from "@mui/material";
 import SearchBox from "./SearchBox";
 import Event from "../home/Event";
 import api from "../api/api";
+import { Link, useNavigate } from "react-router-dom";
 
 const categories = [
   "Conference",
@@ -74,6 +76,14 @@ const Section1 = () => {
 
   console.log("idis", displayedEvents);
 
+  const navigate = useNavigate();
+
+  const handleNavigate = (id) => () => {
+    console.log("adsd" , id)
+    navigate(`/event/${id}`);
+    window.scrollTo(0,0)
+  };
+
   return (
     <Stack
       direction={"column"}
@@ -123,14 +133,17 @@ const Section1 = () => {
         <Grid container spacing={2} width={"100%"}>
           {displayedEvents.map((event, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Event
-                title={event.title}
-                date={event.date}
-                time={event.time}
-                location={event.location}
-                description={event.description}
-                imageUrls={event.imageUrls}
-              />
+              <ButtonBase onClick={handleNavigate(event.id)}>
+                <Event
+                  title={event.title}
+                  date={event.date}
+                  time={event.time}
+                  location={event.location}
+                  description={event.description}
+                  imageUrls={event.imageUrls}
+                  
+                />
+              </ButtonBase>
             </Grid>
           ))}
         </Grid>

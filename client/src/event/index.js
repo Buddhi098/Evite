@@ -12,10 +12,12 @@ import api from "../api/api";
 
 const Index = () => {
   const { id } = useParams();
+  const [event, setEvent] = React.useState({});
 
   const fetchData = async () => {
     try {
-      const response = await api.get(`/public/user/get_event_by_id//${id}`);
+      const response = await api.get(`/public/user/get_event_by_id/${id}`);
+      setEvent(response.data);
       console.log(response.data);
     } catch (error) {
       console.error("Error fetching event", error);
@@ -24,7 +26,7 @@ const Index = () => {
 
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, []);
 
   return (
     <Stack>
@@ -47,7 +49,7 @@ const Index = () => {
             borderRadius: "20px",
           }}
         >
-          <Title />
+          <Title title={event.title} date={event.date}/>
           <Box
             sx={{
               display: "flex",
@@ -57,10 +59,10 @@ const Index = () => {
             }}
           >
             <ImageSlider />
-            <TicketBooking />
+            <TicketBooking price={event.price}/>
           </Box>
           <Box>
-            <EventDetails />
+            <EventDetails date={event.date} time={event.time} location={event.location} description={event.description}/>
           </Box>
         </Paper>
       </Box>

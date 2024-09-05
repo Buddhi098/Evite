@@ -6,28 +6,31 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { theme } from "../Theme";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-const TicketBooking = () => {
+const TicketBooking = ({price}) => {
   const [ticketCount, setTicketCount] = useState(1);
-  const ticket = 100;
-  const [ticketPrice, setTicketPrice] = useState(100);
+  const [ticketPrice, setTicketPrice] = useState(price);
 
   const addButton = useRef(null);
   const removeButton = useRef(null);
 
+  useEffect(()=>{
+    setTicketPrice(price)
+  } , [price])
+  
+
   function addTicket() {
     setTicketCount((prevCount) => {
-      if (prevCount >= 100) {
+      if (prevCount >= price) {
         addButton.current.disabled = true;
         return prevCount;
       } else {
         removeButton.current.disabled = false;
-        setTicketPrice((prevPrice) => ticket * (prevCount + 1));
+        setTicketPrice((prevPrice) => price * (prevCount + 1));
         return prevCount + 1;
       }
     });
@@ -40,7 +43,7 @@ const TicketBooking = () => {
         return prevCount;
       } else {
         addButton.current.disabled = false;
-        setTicketPrice((prevPrice) => ticket * (prevCount - 1));
+        setTicketPrice((prevPrice) => price * (prevCount - 1));
         return prevCount - 1;
       }
     });
